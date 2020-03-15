@@ -1,0 +1,62 @@
+{
+    "name": "hee-fashion-shop",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "^4.9.5",
+        "@material-ui/icons": "^4.5.1",
+        "@material-ui/styles": "^4.6.0",
+        "antd": "^3.26.13",
+        "aos": "^3.0.0-beta.6",
+        "axios": "^0.19.0",
+        "formik": "^2.0.6",
+        "material-ui": "^0.20.2",
+        "moment": "^2.24.0",
+        "moment-timezone": "^0.5.28",
+        "node-sass": "^4.13.0",
+        "react": "^16.13.0",
+        "react-animated-slider": "^2.0.0",
+        "react-chat-window": "^1.2.1",
+        "react-datetime-picker": "^2.8.0",
+        "react-dom": "^16.13.0",
+        "react-hover": "^1.4.0",
+        "react-loading": "^2.0.3",
+        "react-moment": "^0.9.7",
+        "react-owl-carousel": "^2.3.1",
+        "react-redux": "^7.2.0",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "^3.4.0",
+        "react-slick": "^0.25.2",
+        "react-spring": "^8.0.27",
+        "react-swipeable-views": "^0.13.3",
+        "reactjs-popup": "^1.5.0",
+        "recharts": "^2.0.0-beta.2",
+        "redux": "^4.0.4",
+        "redux-thunk": "^2.3.0",
+        "slick-carousel": "^1.8.1",
+        "use-immer": "^0.3.5",
+        "use-socket.io-client": "^1.0.4",
+        "yup": "^0.27.0"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+.hotProduct {
+  margin: 0 auto;
+  padding: 0 10%;
+  .productItem {
+    display: inline-block;
+    padding: 0 5%;
+    margin: 0 auto;
+    img {
+      // display: block;
+      height: 200px;
+      width: 200px;
+      padding: 0 5%;
+    }
+  }
+}

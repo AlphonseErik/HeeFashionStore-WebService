@@ -1,0 +1,8 @@
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+
+export const FETCH_CATEGORY = "FETCH_CATEGORY";
+
+export const FETCH_PRODUCT_NEW_STYLE = "FETCH_PRODUCT_NEW_STYLE";
+
+export const FETCH_PRODUCT_DETAIL = "FETCH_PRODUCT_DETAIL";
