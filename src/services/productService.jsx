@@ -14,6 +14,17 @@ class ProductService {
 
     }
 
+    async fetchProductByCategoryName(categoryname) {
+        try {
+            return restConnector({
+                url: `/api/v1/products/getbycategory/${categoryname}`,
+                method: GET,
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async fetchProductNewStyle() {
         try {
             return restConnector({

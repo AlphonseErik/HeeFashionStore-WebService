@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from '../../layouts/header/Header';
 import { connect } from 'react-redux';
 import ProductService from '../../services/productService.jsx';
@@ -6,9 +6,6 @@ import { FETCH_PRODUCT_NEW_STYLE } from '../../redux/action/actionType';
 import Carousel from '../../components/carousel/Carousel';
 import HotProduct from '../../components/product/hotProduct/HotProduct';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 
 const productService = new ProductService();
 
@@ -37,25 +34,26 @@ const HomeScreen = props => {
         timer.current = setTimeout(() => setState({ isLoading: false }), 200);
     }, [])
 
+    const renderHomeScreen = () => {
+        return (
+            state.isLoading ? (
+                <React.Fragment>
+                    <Header />
+                    <LoadingScreen />
+                </React.Fragment>
+            ) : (
+                    <React.Fragment>
+                        <Header />
+                        <Carousel item={props.productNewStyle} />
+                        <HotProduct />
+                    </React.Fragment>
+                )
+        )
+    }
+
     return (
         <div>
-            <React.Fragment>
-                <CssBaseline />
-                {state.isLoading ? (
-                    <Container fixed>
-                        <Typography component="div" style={{ backgroundColor: '#cfe8fc' }} />
-                        <Header />
-                        <LoadingScreen />
-                    </Container>
-                ) : (
-                        <Container fixed>
-                            <Typography component="div" style={{ backgroundColor: '#cfe8fc' }} />
-                            <Header />
-                            <Carousel item={props.productNewStyle} />
-                            <HotProduct />
-                        </Container>
-                    )}
-            </React.Fragment>
+            {renderHomeScreen()}
         </div>
     )
 }

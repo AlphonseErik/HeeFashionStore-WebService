@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classes from './Header.module.scss';
 import CategoryItemForHeader from '../../components/category/CategoryItemForHeader';
-import ShoppingCart from '../../components/shoppingCart/ShoppingCart';
+import ShoppingCart from '../../components/cart/shoppingCart/ShoppingCart';
+import { Button } from '@material-ui/core';
 
 const Header = props => {
 
@@ -11,26 +12,34 @@ const Header = props => {
 
     }, []);
 
-    let UserAction = () => {
+    const UserAction = () => {
         return (
             (props.credentials) ?
                 (
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <NavLink className="nav-link" to="/home">Hi, {props.credentials.user.fullName}</NavLink>
+                            <Button component="span" href="/home">Hi, {props.credentials.user.fullName}</Button>
                         </li>
                     </ul>
                 )
                 : (
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <Button component="span" href="/login">Login</Button>
                         </li>
                         <li className="nav-item active">
-                            <NavLink className="nav-link" to="/register">Register</NavLink>
+                            <Button component="span" href="/register">Register</Button>
                         </li>
                     </ul>
                 )
+        )
+    }
+
+    const renderShoppingCart = () => {
+        return (
+            <ul className="navbar-nav">
+                <ShoppingCart />
+            </ul>
         )
     }
 
@@ -38,19 +47,19 @@ const Header = props => {
         <div className={classes.header}>
             {/* <div className="container"> */}
             <nav className="navbar navbar-expand-lg">
-                <NavLink className="navbar-brand" to="/home">Hee Fashion Shop</NavLink>
+                <Button color="primary" component="span" href="/home">Hee Fashion Shop</Button>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <NavLink className="nav-link" to="/home">Home</NavLink>
+                            <Button component="span" href="/home">Home</Button>
                         </li>
                         <li className="nav-item active dropdown">
-                            <NavLink className="nav-link" data-toggle="dropdown" to="#" aria-haspopup="true" aria-expanded="false">
+                            <Button component="span" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
                                 <i className="fa fa-th mr-2"></i>Category
-                        </NavLink>
+                            </Button>
                             <div className="dropdown-menu">
                                 <div>
                                     <CategoryItemForHeader />
@@ -59,6 +68,7 @@ const Header = props => {
                         </li>
                     </ul>
                     {UserAction()}
+                    {renderShoppingCart()}
                 </div>
 
             </nav>

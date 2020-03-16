@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import ProductService from "../../services/productService";
 import { FETCH_CATEGORY } from "../../redux/action/actionType";
+import { Button } from "@material-ui/core";
 
 const productService = new ProductService();
 
@@ -20,7 +21,12 @@ const CategoryItemForHeader = props => {
     let renderCategory = () => {
         if (props.category) {
             return props.category.map((categoryItem, index) => {
-                return <span className="dropdown-item" key={index}>{categoryItem.categoryName}</span>
+                return (
+                    <Button color="primary" className="dropdown-item" key={index} 
+                    href={`/products/getbycategory/${categoryItem.categoryName}`}>
+                        {categoryItem.categoryName}
+                    </Button>
+                )
             })
         }
     }

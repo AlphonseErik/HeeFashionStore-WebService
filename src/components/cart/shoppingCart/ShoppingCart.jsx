@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
+import ListCart from '../listCart/ListCart';
+import { NavLink } from 'react-router-dom';
 
 const StyledBadge = withStyles(theme => ({
   badge: {
@@ -15,13 +17,22 @@ const StyledBadge = withStyles(theme => ({
 }))(Badge);
 
 const ShoppingCart = props => {
+
   return (
-    <IconButton aria-label="cart">
-      <StyledBadge badgeContent={4} color="secondary">
-        <ShoppingCartIcon />
-      </StyledBadge>
-    </IconButton>
+    <NavLink to="/listcarts">
+      <IconButton aria-label="cart">
+        <StyledBadge badgeContent={props.cartItem.length} color="secondary">
+          <ShoppingCartIcon>
+            <ListCart />
+          </ShoppingCartIcon>
+        </StyledBadge>
+      </IconButton>
+    </NavLink>
   );
 }
 
-export default connect()(ShoppingCart);
+const mapStateToProps = state => ({
+  cartItem: state.cartItem,
+})
+
+export default connect(mapStateToProps)(ShoppingCart);
