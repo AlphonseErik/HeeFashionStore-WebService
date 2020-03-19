@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Grid, Paper, Button, makeStyles, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
-import { ADD_TO_CART } from '../../../redux/action/actionType';
+import { Grid, Button, makeStyles, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
+import { ADD_TO_CART, AMOUNT_PRODUCT } from '../../../redux/action/actionType';
 import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 
 const useStyles = makeStyles(theme => ({
@@ -24,10 +24,14 @@ const ProductItem = props => {
 
     const { image, productName, ID } = props.item;
 
-    const addToCart = (product) => {
+    const addToCart = (product, ID) => {
         props.dispatch({
             type: ADD_TO_CART,
             payload: product
+        });
+        props.dispatch({
+            type: AMOUNT_PRODUCT,
+            payload: { value: 1, ID }
         })
     }
 
@@ -42,10 +46,8 @@ const ProductItem = props => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="secondary" onClick={() => { addToCart(props.item) }}>Add</Button>
-                        <Button size="small" color="primary" href={`/products/${ID}`}>
-                            Detail
-                        </Button>
+                        <Button size="small" color="secondary" onClick={() => { addToCart(props.item, ID) }}>Add</Button>
+                        <Button size="small" color="primary" href={`/products/${ID}`}>Detail</Button>
                     </CardActions>
                 </Card>
             )
@@ -60,4 +62,7 @@ const ProductItem = props => {
     )
 }
 
-export default connect()(ProductItem);
+const mapStateToProps = state => ({
+})
+
+export default connect(mapStateToProps)(ProductItem);

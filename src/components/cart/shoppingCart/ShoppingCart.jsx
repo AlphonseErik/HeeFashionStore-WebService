@@ -19,7 +19,7 @@ const StyledBadge = withStyles(theme => ({
 const ShoppingCart = props => {
 
   return (
-    <NavLink to="/listcarts">
+    <NavLink to="/payments">
       <IconButton aria-label="cart">
         <StyledBadge badgeContent={props.cartItem.length} color="secondary">
           <ShoppingCartIcon>

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classes from './Header.module.scss';
 import CategoryItemForHeader from '../../components/category/CategoryItemForHeader';
@@ -12,7 +11,27 @@ const Header = props => {
 
     }, []);
 
-    const UserAction = () => {
+    const renderApp = () => {
+        return (
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                    <Button href="/home">Home</Button>
+                </li>
+                <li className="nav-item active dropdown">
+                    <Button component="span" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <i className="fa fa-th mr-2"></i>Category
+                            </Button>
+                    <div className="dropdown-menu">
+                        <div>
+                            <CategoryItemForHeader />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        )
+    }
+
+    const renderUserAction = () => {
         return (
             (props.credentials) ?
                 (
@@ -25,10 +44,10 @@ const Header = props => {
                 : (
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <Button component="span" href="/login">Login</Button>
+                            <Button href="/login">Login</Button>
                         </li>
                         <li className="nav-item active">
-                            <Button component="span" href="/register">Register</Button>
+                            <Button href="/register">Register</Button>
                         </li>
                     </ul>
                 )
@@ -47,27 +66,13 @@ const Header = props => {
         <div className={classes.header}>
             {/* <div className="container"> */}
             <nav className="navbar navbar-expand-lg">
-                <Button color="primary" component="span" href="/home">Hee Fashion Shop</Button>
+                <Button color="primary" href="/home">Hee Fashion Shop</Button>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <Button component="span" href="/home">Home</Button>
-                        </li>
-                        <li className="nav-item active dropdown">
-                            <Button component="span" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
-                                <i className="fa fa-th mr-2"></i>Category
-                            </Button>
-                            <div className="dropdown-menu">
-                                <div>
-                                    <CategoryItemForHeader />
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    {UserAction()}
+                    {renderApp()}
+                    {renderUserAction()}
                     {renderShoppingCart()}
                 </div>
 

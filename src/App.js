@@ -13,12 +13,13 @@ import CategoryDetail from "./components/category/categoryDetail/CategoryDetail"
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import ListCart from "./components/cart/listCart/ListCart";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import Payment from "./components/payment/Payment";
+import Header from "./layouts/header/Header";
 
 const App = props => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
     () =>
@@ -26,8 +27,22 @@ const App = props => {
         palette: {
           // type: prefersDarkMode ? 'dark' : 'light',
         },
+        typography: {
+          fontFamily: [
+            "-apple-system",
+            "BlinkMacSystemFont",
+            '"Segoe UI"',
+            "Roboto",
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"'
+          ].join(",")
+        }
       }),
-    [prefersDarkMode],
+    [prefersDarkMode]
   );
 
   useEffect(() => {
@@ -41,25 +56,31 @@ const App = props => {
 
   return (
     <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <CssBaseline />
-        <Container fixed>
-          <Typography component="div" style={{ backgroundColor: "#cfe8fc" }} />
-          <Switch>
-            <Route path="/home" exact component={HomeScreen} />
-            <Route path="/login" exact component={LoginScreen} />
-            <Route path="/register" exact component={RegisterScreen} />
-
-            <Route path="/products/getbycategory/:categoryname" component={CategoryDetail}
+      <ThemeProvider theme={theme}>
+        <React.Fragment>
+          <CssBaseline />
+          <Container fixed>
+            <Typography
+              component="div"
+              style={{ backgroundColor: "#cfe8fc" }}
             />
-            <Route path="/products/:id" component={ProductDetail} />
-            <Route path="/listcarts" component={ListCart} />
-            <Route component={HomeScreen} />
-            <Route component={NotFoundScreen} />
-          </Switch>
-        </Container>
-      </React.Fragment>
+            <Header/>
+            <Switch>
+              <Route path="/home" exact component={HomeScreen} />
+              <Route path="/login" exact component={LoginScreen} />
+              <Route path="/register" exact component={RegisterScreen} />
+
+              <Route
+                path="/products/getbycategory/:categoryname"
+                component={CategoryDetail}
+              />
+              <Route path="/products/:id" component={ProductDetail} />
+              <Route path="/payments" component={Payment} />
+              <Route component={HomeScreen} />
+              <Route component={NotFoundScreen} />
+            </Switch>
+          </Container>
+        </React.Fragment>
       </ThemeProvider>
     </BrowserRouter>
   );

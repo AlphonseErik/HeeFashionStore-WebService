@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../layouts/header/Header';
 import { connect } from 'react-redux';
 import ProductService from '../../services/productService.jsx';
 import { FETCH_PRODUCT_NEW_STYLE } from '../../redux/action/actionType';
@@ -38,12 +37,10 @@ const HomeScreen = props => {
         return (
             state.isLoading ? (
                 <React.Fragment>
-                    <Header />
                     <LoadingScreen />
                 </React.Fragment>
             ) : (
                     <React.Fragment>
-                        <Header />
                         <Carousel item={props.productNewStyle} />
                         <HotProduct />
                     </React.Fragment>
