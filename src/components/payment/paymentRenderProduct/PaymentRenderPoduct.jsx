@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { CardActionArea, Card, CardMedia, CardContent, Button, makeStyles, Typography, CardActions, createStyles, Grid, Slider, Input } from '@material-ui/core';
-import { AMOUNT_PRODUCT } from '../../../redux/action/actionType';
+import { CardActionArea, Card, CardMedia, CardContent, Button, makeStyles, Typography, CardActions, createStyles, Grid, Input } from '@material-ui/core';
+import { AMOUNT_PRODUCT, DELETED_FROM_CART } from '../../../redux/action/actionType';
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) =>
@@ -33,13 +33,20 @@ const PaymentRenderPoduct = props => {
     const classes = useStyles();
 
     const { image, price, productName, ID } = props.item;
-    const addAmount = (value, ID) => {
+    //Action
+    const addAmount = (value, ID, productName, price) => {
         props.dispatch({
             type: AMOUNT_PRODUCT,
-            payload: { value, ID }
+            payload: { value, ID, productName, price }
         })
     }
 
+    const deleteFromCart = (ID) => {
+        props.dispatch({
+            type: DELETED_FROM_CART,
+            payload: ID
+        })
+    }
     const handleInputChange = event => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
@@ -52,7 +59,15 @@ const PaymentRenderPoduct = props => {
         }
     };
 
+    //Render
     const renderErr = () => {
+        if (value === 10) {
+            return (
+                <div>
+                    <Alert severity="success">Maximum Amount</Alert>
+                </div>
+            )
+        }
         if (value > 10) {
             return (
                 <div className={classes.alert}>
@@ -67,16 +82,7 @@ const PaymentRenderPoduct = props => {
                 </div>
             )
         }
-    }
 
-    const renderSuccess = () => {
-        if (value === 10) {
-            return (
-                <div>
-                    <Alert severity="success">Maximum Amount</Alert>
-                </div>
-            )
-        }
     }
 
     const renderUpDownAmount = () => {
@@ -84,8 +90,8 @@ const PaymentRenderPoduct = props => {
             <div>
                 <Grid item className={classes.inputAmount}>
                     x<Input className={classes.input} value={value} margin="dense" onChange={handleInputChange} onBlur={handleBlur} disableUnderline={true}
-                        inputProps={{ step: 1, min: 1, max: 10, type: 'number', 'aria-labelledby': 'input-slider' }} onClick={() => { addAmount(value, ID) }}
-                    />{renderSuccess()}
+                        inputProps={{ step: 1, min: 1, max: 10, type: 'number', 'aria-labelledby': 'input-slider' }} onClick={() => { addAmount(value, ID, productName, price) }}
+                    />
                 </Grid>
                 <Grid>{renderErr()}</Grid>
             </div>
@@ -115,10 +121,16 @@ const PaymentRenderPoduct = props => {
                 <Button size="medium" disableFocusRipple={true} disableElevation={true} disableRipple={true}>
                     {renderUpDownAmount()}
                 </Button>
+                <Button size="medium" disableFocusRipple={true} disableElevation={true} disableRipple={true} onClick={() => { deleteFromCart(ID) }}>
+                    Delete
+                </Button>
             </CardActions>
-
         </Card>
     )
 }
 
-export default connect()(PaymentRenderPoduct);
+const mapStateToProps = state => ({
+    cartItem: state.cartItem,
+})
+
+export default connect(mapStateToProps)(PaymentRenderPoduct);

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ProductService from "../../services/productService";
 import { FETCH_CATEGORY } from "../../redux/action/actionType";
 import { Button } from "@material-ui/core";
+import LoadingScreen from "../../screens/loadingScreen/LoadingScreen";
 
 const productService = new ProductService();
 
@@ -22,13 +23,18 @@ const CategoryItemForHeader = props => {
         if (props.category) {
             return props.category.map((categoryItem, index) => {
                 return (
-                    <Button color="primary" className="dropdown-item" key={index} 
-                    href={`/products/getbycategory/${categoryItem.categoryName}`}>
+                    <Button color="primary" className="dropdown-item" key={index}
+                        href={`/products/getbycategory/${categoryItem.categoryName}`}>
                         {categoryItem.categoryName}
                     </Button>
                 )
             })
         }
+        return (
+            <Button color="primary" className="dropdown-item" size={"small"}>
+                <LoadingScreen />
+            </Button>
+        )
     }
 
     return (

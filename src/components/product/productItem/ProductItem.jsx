@@ -22,16 +22,16 @@ const ProductItem = props => {
 
     const classes = useStyles();
 
-    const { image, productName, ID } = props.item;
+    const { image, productName, ID, price } = props.item;
 
     const addToCart = (product, ID) => {
         props.dispatch({
             type: ADD_TO_CART,
-            payload: product
+            payload: product,
         });
         props.dispatch({
             type: AMOUNT_PRODUCT,
-            payload: { value: 1, ID }
+            payload: { value: 1, ID, productName, price },
         })
     }
 
@@ -46,7 +46,7 @@ const ProductItem = props => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="secondary" onClick={() => { addToCart(props.item, ID) }}>Add</Button>
+                        <Button size="small" color="secondary" onClick={() => { addToCart(props.item, ID, productName, price) }}>Add</Button>
                         <Button size="small" color="primary" href={`/products/${ID}`}>Detail</Button>
                     </CardActions>
                 </Card>

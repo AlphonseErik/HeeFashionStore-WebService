@@ -1,10 +1,11 @@
-import { AMOUNT_PRODUCT } from '../action/actionType';
+import { AMOUNT_PRODUCT, DELETED_FROM_CART } from '../action/actionType';
 
-let initialState = []
+let initialState = [];
 
 const AmountReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case AMOUNT_PRODUCT: {
+            console.log(payload)
             console.log(payload.value, payload.ID)
             let amountItem = [...state];
             let index = amountItem.findIndex(product => product.ID === payload.ID);
@@ -15,6 +16,12 @@ const AmountReducer = (state = initialState, { type, payload }) => {
                 amountItem.splice(index, 1, payload)
             }
             state = amountItem
+            return [...state];
+
+        }
+        case DELETED_FROM_CART: {
+            let index = state.findIndex(product => product.ID === payload);
+            state.splice(index, 1)
             return [...state];
         }
         default:
