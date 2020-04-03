@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import ProductService from '../../services/productService.jsx';
 import { FETCH_PRODUCT_NEW_STYLE } from '../../redux/action/actionType';
 import Carousel from '../../components/carousel/Carousel';
-import HotProduct from '../../components/product/hotProduct/HotProduct';
-import LoadingScreen from '../loadingScreen/LoadingScreen';
+import HotProduct from '../../components/product/hotProduct/hotProduct';
+import LoadingScreen from '../loadingScreen/loadingScreen';
 
 const productService = new ProductService();
 

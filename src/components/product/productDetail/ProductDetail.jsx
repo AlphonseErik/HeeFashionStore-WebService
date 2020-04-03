@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { fetchProductDetail } from '../../../redux/action/productAction';
 import classes from './ProductDetail.module.scss'
-import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
 
 const ProductDetail = props => {
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import { Typography, Grid } from '@material-ui/core';
-import ListCart from '../cart/listCart/ListCart';
+import ListCart from '../cart/listCart/listCart';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -27,18 +27,6 @@ const useStyles = makeStyles(theme => ({
         minWidth: 650,
     },
 }));
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const Payment = props => {
     const classes = useStyles();
@@ -76,10 +64,10 @@ const Payment = props => {
                                 </TableRow>
                             ))}
                         </TableBody>
-                        <TableRow>
+                        {/* <TableRow>
                             <TableCell align="right">Total</TableCell>
                             <TableCell align="right">:    0$</TableCell>
-                        </TableRow>
+                        </TableRow> */}
                     </Table>
                 </TableContainer>
             </FormControl>
@@ -101,7 +89,7 @@ const Payment = props => {
 }
 
 const mapStateToProps = state => ({
-    amount: state.amount,
+    amount: state.amount.amountItem,
 })
 
 export default connect(mapStateToProps)(Payment);

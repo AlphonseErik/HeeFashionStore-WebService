@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeScreen from "./screens/homeScreen/HomeSreen";
-import LoginScreen from "./screens/loginScreen/LoginScreen";
+import HomeScreen from "./screens/homeScreen/homeSreen";
+import LoginScreen from "./screens/loginScreen/loginScreen";
 import { connect } from "react-redux";
 import { restConnector } from "./services";
-import { LOGIN } from "./redux/action/actionType";
+import { LOGIN, AMOUNT_PRODUCT, GET_PRODUCT } from "./redux/action/actionType";
 import reduxAction from "./redux/action/action";
-import NotFoundScreen from "./screens/notFound/NotFoundScreen";
-import RegisterScreen from "./screens/registerScreen/RegisterScreen";
+import NotFoundScreen from "./screens/notFound/notFoundScreen";
+import RegisterScreen from "./screens/registerScreen/registerScreen";
 import ProductDetail from "./components/product/productDetail/ProductDetail";
 import CategoryDetail from "./components/category/categoryDetail/CategoryDetail";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,7 +16,7 @@ import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Payment from "./components/payment/Payment";
-import Header from "./layouts/header/Header";
+import Header from "./layouts/header/header";
 
 const App = props => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -52,7 +52,12 @@ const App = props => {
       restConnector.defaults.headers["Authorization"] = "Bearer " + accessToken;
       props.dispatch(reduxAction(LOGIN, JSON.parse(credentials)));
     }
-  }, [props]);
+    const product = localStorage.getItem("product");
+    console.log("product", product);
+    if (product) {
+      props.dispatch(reduxAction(GET_PRODUCT, JSON.parse(product)));
+    }
+  }, []);
 
   return (
     <BrowserRouter>
@@ -64,7 +69,7 @@ const App = props => {
               component="div"
               style={{ backgroundColor: "#cfe8fc" }}
             />
-            <Header/>
+            <Header />
             <Switch>
               <Route path="/home" exact component={HomeScreen} />
               <Route path="/login" exact component={LoginScreen} />
@@ -86,6 +91,8 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  amount: state.amount
+});
 
 export default connect(mapStateToProps)(App);

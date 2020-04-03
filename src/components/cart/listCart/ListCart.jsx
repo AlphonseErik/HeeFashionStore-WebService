@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Grid, makeStyles, Typography, Slider, Input } from '@material-ui/core';
-import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
 import { createStyles } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert'
-import { AMOUNT_PRODUCT } from '../../../redux/action/actionType';
 import PaymentRenderPoduct from '../../payment/paymentRenderProduct/PaymentRenderPoduct';
 
 const useStyles = makeStyles((theme) =>
@@ -28,9 +26,9 @@ const ListCart = props => {
     const [spacing, setSpacing] = React.useState(10);
 
     const renderListCart = () => {
-        if (props.cartItem) {
+        if (props.amount) {
             return <Grid container spacing={spacing} justify="center">
-                {props.cartItem.map((item, index) => {
+                {props.amount.map((item, index) => {
                     return (
                         <Grid key={index} item>
                             <PaymentRenderPoduct item={item} />
@@ -50,8 +48,7 @@ const ListCart = props => {
 }
 
 const mapStateToProps = state => ({
-    cartItem: state.cartItem,
-    amount: state.amount.productToPayload,
+    amount: state.amount.amountItem,
 })
 
 export default connect(mapStateToProps)(ListCart);

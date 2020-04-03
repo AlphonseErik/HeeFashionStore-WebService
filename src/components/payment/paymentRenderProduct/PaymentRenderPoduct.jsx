@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { CardActionArea, Card, CardMedia, CardContent, Button, makeStyles, Typography, CardActions, createStyles, Grid, Input } from '@material-ui/core';
-import { AMOUNT_PRODUCT, DELETED_FROM_CART } from '../../../redux/action/actionType';
+import { AMOUNT_PRODUCT, DELETED_FROM_CART, ADD_TO_CART } from '../../../redux/action/actionType';
 import { Alert } from '@material-ui/lab';
+import { settings } from '../../../configs/settings';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -33,11 +34,12 @@ const PaymentRenderPoduct = props => {
     const classes = useStyles();
 
     const { image, price, productName, ID } = props.item;
+
     //Action
-    const addAmount = (value, ID, productName, price) => {
+    const addAmount = (value, ID, productName, price, image) => {
         props.dispatch({
-            type: AMOUNT_PRODUCT,
-            payload: { value, ID, productName, price }
+            type: ADD_TO_CART,
+            payload: { value, ID, productName, price, image }
         })
     }
 
@@ -48,7 +50,7 @@ const PaymentRenderPoduct = props => {
         })
     }
     const handleInputChange = event => {
-        setValue(event.target.value === '' ? '' : Number(event.target.value));
+        setValue(event.target.value === value ? '' : Number(event.target.value));
     };
 
     const handleBlur = () => {
@@ -90,7 +92,7 @@ const PaymentRenderPoduct = props => {
             <div>
                 <Grid item className={classes.inputAmount}>
                     x<Input className={classes.input} value={value} margin="dense" onChange={handleInputChange} onBlur={handleBlur} disableUnderline={true}
-                        inputProps={{ step: 1, min: 1, max: 10, type: 'number', 'aria-labelledby': 'input-slider' }} onClick={() => { addAmount(value, ID, productName, price) }}
+                        inputProps={{ step: 1, min: 1, max: 10, type: 'number', 'aria-labelledby': 'input-slider' }} onClick={() => { addAmount(value, ID, productName, price, image) }}
                     />
                 </Grid>
                 <Grid>{renderErr()}</Grid>
@@ -130,7 +132,7 @@ const PaymentRenderPoduct = props => {
 }
 
 const mapStateToProps = state => ({
-    cartItem: state.cartItem,
+    amount: state.amount.amountItem,
 })
 
 export default connect(mapStateToProps)(PaymentRenderPoduct);

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import classes from './Header.module.scss';
-import CategoryItemForHeader from '../../components/category/CategoryItemForHeader';
-import ShoppingCart from '../../components/cart/shoppingCart/ShoppingCart';
+import CategoryItemForHeader from '../../components/category/categoryItemForHeader';
+import ShoppingCart from '../../components/cart/shoppingCart/shoppingCart';
 import { Button } from '@material-ui/core';
 
 const Header = props => {

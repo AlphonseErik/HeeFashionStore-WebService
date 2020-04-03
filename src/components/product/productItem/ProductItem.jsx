@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Grid, Button, makeStyles, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
 import { ADD_TO_CART, AMOUNT_PRODUCT } from '../../../redux/action/actionType';
-import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
+import { settings } from '../../../configs/settings';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,11 +28,7 @@ const ProductItem = props => {
     const addToCart = (product, ID) => {
         props.dispatch({
             type: ADD_TO_CART,
-            payload: product,
-        });
-        props.dispatch({
-            type: AMOUNT_PRODUCT,
-            payload: { value: 1, ID, productName, price },
+            payload: { value: 1, ID, productName, price, image },
         })
     }
 
@@ -63,6 +60,7 @@ const ProductItem = props => {
 }
 
 const mapStateToProps = state => ({
+
 })
 
 export default connect(mapStateToProps)(ProductItem);

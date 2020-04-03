@@ -12,3 +12,4 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETED_FROM_CART = "DELETED_FROM_CART";
 
 export const AMOUNT_PRODUCT = "AMOUNT_PRODUCT";
+export const GET_PRODUCT = "GET_PRODUCT";

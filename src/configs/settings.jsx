@@ -3,4 +3,5 @@ export const settings = {
     account: 'account',
     token: 'accessToken',
     domain: 'http://localhost:10000',
+    product: 'product',
 }

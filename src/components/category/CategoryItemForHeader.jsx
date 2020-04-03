@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ProductService from "../../services/productService";
 import { FETCH_CATEGORY } from "../../redux/action/actionType";
 import { Button } from "@material-ui/core";
-import LoadingScreen from "../../screens/loadingScreen/LoadingScreen";
+import LoadingScreen from "../../screens/loadingScreen/loadingScreen";
 
 const productService = new ProductService();
 
