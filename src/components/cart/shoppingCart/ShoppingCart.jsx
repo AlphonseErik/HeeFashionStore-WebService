@@ -21,7 +21,7 @@ const ShoppingCart = props => {
   return (
     <NavLink to="/payments">
       <IconButton aria-label="cart">
-        <StyledBadge badgeContent={props.amount.length} color="secondary">
+        <StyledBadge badgeContent={props.cart.length} color="secondary">
           <ShoppingCartIcon>
             <ListCart />
           </ShoppingCartIcon>
@@ -32,7 +32,7 @@ const ShoppingCart = props => {
 }
 
 const mapStateToProps = state => ({
-  amount: state.amount.amountItem,
+  cart: state.cart.cartItem,
 })
 
 export default connect(mapStateToProps)(ShoppingCart);

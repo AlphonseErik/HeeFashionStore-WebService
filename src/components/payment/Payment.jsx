@@ -39,8 +39,8 @@ const Payment = props => {
     }
 
     const renderPayment = () => {
-        console.log('render', props.amount)
-        if (props.amount !== []) {
+        console.log('render', props.cart)
+        if (props.cart !== []) {
             return (
                 <FormControl className={classes.formControl}>
                     <Typography>Order Detail</Typography>
@@ -56,7 +56,7 @@ const Payment = props => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {props.amount.map((item, index) => (
+                                {props.cart.map((item, index) => (
                                     <TableRow key={index}>
                                         <TableCell component="th" scope="row">{index + 1}
                                         </TableCell>
@@ -67,20 +67,17 @@ const Payment = props => {
                                     </TableRow>
                                 ))}
                             </TableBody>
-                            {/* <TableRow>
-                                <TableCell align="right">Total</TableCell>
-                                <TableCell align="right">:    0$</TableCell>
-                            </TableRow> */}
                         </Table>
                     </TableContainer>
                 </FormControl>
             )
+        } else {
+            return (
+                <div>
+                    <h1>Not Found</h1>
+                </div>
+            )
         }
-        return (
-            <div>
-
-            </div>
-        )
     }
 
     return (
@@ -98,7 +95,7 @@ const Payment = props => {
 }
 
 const mapStateToProps = state => ({
-    amount: state.amount.amountItem,
+    cart: state.cart.cartItem,
 })
 
 export default connect(mapStateToProps)(Payment);

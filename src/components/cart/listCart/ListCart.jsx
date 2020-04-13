@@ -26,9 +26,9 @@ const ListCart = props => {
     const [spacing, setSpacing] = React.useState(10);
 
     const renderListCart = () => {
-        if (props.amount) {
+        if (props.cart) {
             return <Grid container spacing={spacing} justify="center">
-                {props.amount.map((item, index) => {
+                {props.cart.map((item, index) => {
                     return (
                         <Grid key={index} item>
                             <PaymentRenderPoduct item={item} />
@@ -48,7 +48,7 @@ const ListCart = props => {
 }
 
 const mapStateToProps = state => ({
-    amount: state.amount.amountItem,
+    cart: state.cart.cartItem,
 })
 
 export default connect(mapStateToProps)(ListCart);

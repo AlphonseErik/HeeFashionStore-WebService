@@ -83,6 +83,9 @@ const App = props => {
               <Route path="/payments" component={Payment} />
               <Route component={HomeScreen} />
               <Route component={NotFoundScreen} />
+
+              {/* Private Route */}
+              {/* <PrivateRoute path="" Component/> */}
             </Switch>
           </Container>
         </React.Fragment>

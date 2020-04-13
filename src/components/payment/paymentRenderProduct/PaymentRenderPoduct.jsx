@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { CardActionArea, Card, CardMedia, CardContent, Button, makeStyles, Typography, CardActions, createStyles, Grid, Input } from '@material-ui/core';
-import { AMOUNT_PRODUCT, DELETED_FROM_CART, ADD_TO_CART } from '../../../redux/action/actionType';
+import { DELETED_FROM_CART, ADD_TO_CART } from '../../../redux/action/actionType';
 import { Alert } from '@material-ui/lab';
-import { settings } from '../../../configs/settings';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -132,7 +131,7 @@ const PaymentRenderPoduct = props => {
 }
 
 const mapStateToProps = state => ({
-    amount: state.amount.amountItem,
+    amount: state.cart.cartItem,
 })
 
 export default connect(mapStateToProps)(PaymentRenderPoduct);
