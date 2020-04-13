@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeScreen from "./screens/homeScreen/homeSreen";
-import LoginScreen from "./screens/loginScreen/loginScreen";
+import HomeScreen from "./screens/homeScreen/HomeSreen";
+import LoginScreen from "./screens/loginScreen/LoginScreen";
 import { connect } from "react-redux";
 import { restConnector } from "./services";
-import { LOGIN, AMOUNT_PRODUCT, GET_PRODUCT } from "./redux/action/actionType";
+import { LOGIN, GET_PRODUCT } from "./redux/action/actionType";
 import reduxAction from "./redux/action/action";
-import NotFoundScreen from "./screens/notFound/notFoundScreen";
-import RegisterScreen from "./screens/registerScreen/registerScreen";
+import NotFoundScreen from "./screens/notFound/NotFoundScreen";
+import RegisterScreen from "./screens/registerScreen/RegisterScreen";
 import ProductDetail from "./components/product/productDetail/ProductDetail";
 import CategoryDetail from "./components/category/categoryDetail/CategoryDetail";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,7 +16,7 @@ import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Payment from "./components/payment/Payment";
-import Header from "./layouts/header/header";
+import Header from "./layouts/header/Header";
 
 const App = props => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");

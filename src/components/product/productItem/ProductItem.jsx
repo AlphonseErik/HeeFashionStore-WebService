@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Grid, Button, makeStyles, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
 import { ADD_TO_CART, AMOUNT_PRODUCT } from '../../../redux/action/actionType';
-import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 import { settings } from '../../../configs/settings';
 
 const useStyles = makeStyles(theme => ({

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { fetchProductByCategoryName } from '../../../redux/action/productAction';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
-import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Header from '../../../layouts/header/header';
 import ProductItem from '../../product/productItem/ProductItem';
 
 const useStyles = makeStyles(theme => ({

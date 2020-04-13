@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 import ProductItem from '../productItem/ProductItem';
 import Pagination from '@material-ui/lab/Pagination';
 

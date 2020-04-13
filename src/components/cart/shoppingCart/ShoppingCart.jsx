@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
-import ListCart from '../listCart/listCart';
+import ListCart from '../listCart/ListCart';
 import { NavLink } from 'react-router-dom';
 
 const StyledBadge = withStyles(theme => ({

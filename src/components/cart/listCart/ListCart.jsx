@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Grid, makeStyles, Typography, Slider, Input } from '@material-ui/core';
-import LoadingScreen from '../../../screens/loadingScreen/loadingScreen';
+import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 import { createStyles } from '@material-ui/core';
 import PaymentRenderPoduct from '../../payment/paymentRenderProduct/PaymentRenderPoduct';
 
