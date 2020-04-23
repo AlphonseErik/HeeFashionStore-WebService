@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const HotProduct = props => {
 
-    const [spacing, setSpacing] = React.useState(10);
+    const [spacing] = React.useState(10);
     const classes = useStyles();
 
     let renderPagination = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { CardActionArea, Card, CardMedia, CardContent, Button, makeStyles, Typography, CardActions, createStyles, Grid, Input } from '@material-ui/core';
-import { DELETED_FROM_CART, ADD_TO_CART } from '../../../redux/action/actionType';
+import { DELETED_FROM_CART, ADD_TO_CART, ADD_AMOUNT } from '../../../../redux/action/actionType';
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) =>
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
         }
     }));
 
-const PaymentRenderPoduct = props => {
+const RenderPoduct = props => {
 
     const [value, setValue] = React.useState(1);
     const classes = useStyles();
@@ -39,6 +39,10 @@ const PaymentRenderPoduct = props => {
         props.dispatch({
             type: ADD_TO_CART,
             payload: { value, ID, productName, price, image }
+        });
+        props.dispatch({
+            type: ADD_AMOUNT,
+            payload: { value, ID, price, total: (value * price) },
         })
     }
 
@@ -61,7 +65,7 @@ const PaymentRenderPoduct = props => {
     };
 
     //Render
-    const renderErr = () => {
+    const renderError = () => {
         if (value === 10) {
             return (
                 <div>
@@ -94,7 +98,7 @@ const PaymentRenderPoduct = props => {
                         inputProps={{ step: 1, min: 1, max: 10, type: 'number', 'aria-labelledby': 'input-slider' }} onClick={() => { addAmount(value, ID, productName, price, image) }}
                     />
                 </Grid>
-                <Grid>{renderErr()}</Grid>
+                <Grid>{renderError()}</Grid>
             </div>
         )
     }
@@ -131,7 +135,7 @@ const PaymentRenderPoduct = props => {
 }
 
 const mapStateToProps = state => ({
-    amount: state.cart.cartItem,
+    cart: state.cart.cartItem,
 })
 
-export default connect(mapStateToProps)(PaymentRenderPoduct);
+export default connect(mapStateToProps)(RenderPoduct);

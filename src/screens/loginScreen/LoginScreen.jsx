@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 function LoginScreen(props) {
 
-
+    console.log(props.history)
     let [user, setUser] = React.useState({
         userLogin: {
             username: "",

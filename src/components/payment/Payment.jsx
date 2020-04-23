@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import LoadingScreen from '../../screens/loadingScreen/LoadingScreen';
+import RenderCheck from './view/renderCheck/RenderCheck';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,45 +39,45 @@ const Payment = props => {
     }
 
     const renderPayment = () => {
-        console.log('render', props.cart)
-        if (props.cart !== []) {
-            return (
-                <FormControl className={classes.formControl}>
-                    <Typography>Order Detail</Typography>
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>No.</TableCell>
-                                    <TableCell align="right">Product Name</TableCell>
-                                    <TableCell align="right">Amount</TableCell>
-                                    <TableCell align="right">Price</TableCell>
-                                    <TableCell align="right">Total</TableCell>
+        console.log('cart', props.cart)
+        return (
+            <FormControl className={classes.formControl}>
+                <Typography>Order Detail</Typography>
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>No.</TableCell>
+                                <TableCell align="left">Product Name</TableCell>
+                                <TableCell align="center">Amount</TableCell>
+                                <TableCell align="center">Price</TableCell>
+                                <TableCell align="center">Total</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {props.cart.map((item, index) => (
+                                <TableRow key={index}>
+                                    <TableCell component="th" scope="row">{index + 1}
+                                    </TableCell>
+                                    <TableCell align="left">{item.productName}</TableCell>
+                                    <TableCell align="center">{item.value}</TableCell>
+                                    <TableCell align="center">{item.price}</TableCell>
+                                    <TableCell align="center">{item.price * item.value}</TableCell>
                                 </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {props.cart.map((item, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell component="th" scope="row">{index + 1}
-                                        </TableCell>
-                                        <TableCell align="right">{item.productName}</TableCell>
-                                        <TableCell align="right">{item.value}</TableCell>
-                                        <TableCell align="right">{item.price}</TableCell>
-                                        <TableCell align="right">{item.price * item.value}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </FormControl>
-            )
-        } else {
-            return (
-                <div>
-                    <h1>Not Found</h1>
-                </div>
-            )
-        }
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </FormControl>
+        )
+    }
+
+    const renderCheck = () => {
+        return (
+            <div>
+                <RenderCheck history={props.history}/>
+            </div>
+        )
     }
 
     return (
@@ -88,6 +88,7 @@ const Payment = props => {
                 </Grid>
                 <Grid item xs={5}>
                     {renderPayment()}
+                    {renderCheck()}
                 </Grid>
             </Grid>
         </React.Fragment>
