@@ -21,8 +21,8 @@ export const signInAction = (userLogin, history) => {
                 dispatch(reduxAction(LOGIN, res.data));
                 history.push('./home');
             }).catch(err => {
-                //console.log(err.response.data);
-                alert('Error: ' + err.response.data.message)
+                console.log(err.response);
+                alert('Error: ' + err.response);
             })
         } catch (err) {
             console.log(err);
