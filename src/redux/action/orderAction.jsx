@@ -1,6 +1,7 @@
 import { restConnector } from "../../services";
 import { ORDER_DELETE_PRODUCT, DELETED_FROM_CART } from "./actionType";
 import reduxAction from "./action";
+import { POST } from "../../services/method";
 
 
 export const orderAction = (order, userid, history) => {
@@ -11,7 +12,7 @@ export const orderAction = (order, userid, history) => {
                 headers: {
                     userid
                 },
-                method: "POST",
+                method: POST,
                 url: "/api/v1/orders",
                 data: {
                     orderDetail: {
@@ -23,7 +24,6 @@ export const orderAction = (order, userid, history) => {
                 let response = res.data;
                 if (response.status === "SUCCESS") {
                     dispatch(reduxAction(DELETED_FROM_CART, res.data))
-                    history.push('./home')
                     return alert('ORDER SUCCESS');
                 }
                 alert('ORDER FALSE');

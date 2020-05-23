@@ -1,4 +1,5 @@
 export const LOGIN = "LOGIN";
+export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGOUT = "LOGOUT";
 
 export const FETCH_CATEGORY = "FETCH_CATEGORY";
@@ -16,3 +17,7 @@ export const GET_PRODUCT = "GET_PRODUCT";
 export const ORDER_DELETE_PRODUCT = "ORDER_DELETE_PRODUCT";
 
 export const ADD_AMOUNT = "ADD_AMOUNT";
+
+export const ADD_TOTAL = "ADD_TOTAL";
+
+export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS";

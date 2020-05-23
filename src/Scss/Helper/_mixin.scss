@@ -1,0 +1,36 @@
+@import './variable';
+@mixin text_style($txt-color, $fs, $fw) {
+    color: $txt-color;
+    font-size: $fs;
+    font-weight: $fw;
+}
+
+@mixin btn_AddCard ($color, $fs, $pd_topbot, $pd_rightleft, $bg, $ml) {
+    color: $color;
+    font-size: $fs;
+    padding: $pd_topbot $pd_rightleft;
+    background-color: $bg;
+    margin-left: $ml;
+}
+
+@mixin button_header($bg-color, $color, $bd-color, $pd-top-bottom, $pd-right-left, $bd-radius) {
+    background-color: $bg-color;
+    color: $color;
+    border: 1px solid $bd-color;
+    padding: $pd-top-bottom $pd-right-left;
+    border-radius: $bd-radius;
+}
+
+@mixin buttoncontact() {}
+
+@mixin MediaQuery($breakpoint) {
+    @if map-has-key($map: $breakpoints, $key: $breakpoint) {
+        $value: map-get($map: $breakpoints, $key: $breakpoint);
+        @media screen and(max-width: $value) {
+            @content
+        }
+    }
+    @else {
+        @warn "`{$breakpoint}` isn't in breakpoints";
+    }
+}

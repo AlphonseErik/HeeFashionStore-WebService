@@ -1,6 +1,6 @@
 import { restConnector } from "../../services"
 import reduxAction from "./action";
-import { LOGIN } from "./actionType";
+import { LOGIN, LOGIN_ADMIN } from "./actionType";
 import { settings } from "../../configs/settings";
 
 export const signInAction = (userLogin, history) => {
@@ -13,11 +13,14 @@ export const signInAction = (userLogin, history) => {
             }).then(res => {
                 console.log(res.data);
                 localStorage.setItem(settings.token, res.data.accesstoken);
+                restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accesstoken;
                 if (res.data.user.isSuperAdmin) {
                     localStorage.setItem(settings.isAdmin, res.data.user.isSuperAdmin);
+                    dispatch(reduxAction(LOGIN_ADMIN, res.data));
+                    history.push('./dashboard');
                 }
                 localStorage.setItem(settings.account, JSON.stringify(res.data));
-                restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accesstoken;
+                
                 dispatch(reduxAction(LOGIN, res.data));
                 history.push('./home');
             }).catch(err => {

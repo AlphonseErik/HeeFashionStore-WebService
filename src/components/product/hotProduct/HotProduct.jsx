@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import LoadingScreen from '../../../screens/loadingScreen/LoadingScreen';
 import ProductItem from '../productItem/ProductItem';
 import Pagination from '@material-ui/lab/Pagination';
@@ -49,7 +49,11 @@ const HotProduct = props => {
     return (
         <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
-                <p>This is Hot Propduct</p>
+                <br />
+                <div className="text-center">
+                    <h1 className="text text-danger">Hot Product</h1>
+                </div>
+                <br />
                 {renderProduct()}
                 {renderPagination()}
             </Grid>

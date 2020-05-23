@@ -27,21 +27,21 @@ function RenderCheck(props) {
 
     console.log('amount', props.cart);
     console.log('userID', props.userID);
-    console.log('history', props.history)
+    console.log('history', props.history);
+    console.log('cart', props.cart);
 
     const handleSubmitOrder = e => {
         e.preventDefault();
         let valid = true;
         if (!props.userID) {
-            alert('User Must Login First!!');
-            return props.history.push('./login');
+            return alert('User Must Login First!!');
         }
         if (valid) {
             let { ID } = props.userID;
             props.dispatch(orderAction(props.cart, ID, props.history))
         }
         else {
-            alert('Please Check Again!!')
+            alert('Please Check Again!!');
         }
     }
 
@@ -63,6 +63,23 @@ function RenderCheck(props) {
         )
     }
 
+    React.useEffect(()=>{
+
+    },[props.cart], [props.total])
+
+    let total = 0
+
+    let renderTotal = () => {
+        if (props.total) {
+            return (
+                <TableCell align="right">Total:{props.total}$</TableCell>
+            )
+        }
+        return (
+            <TableCell align="right">Total: 0$</TableCell>
+        )
+    }
+
     const renderCheck = () => {
         return (
             <form onSubmit={handleSubmitOrder}>
@@ -71,7 +88,7 @@ function RenderCheck(props) {
                         <Table className={classes.table} aria-label="simple table">
                             <TableBody>
                                 <TableRow>
-                                    <TableCell align="right">Total: $</TableCell>
+                                    {renderTotal()}
                                     <TableCell align="right">
                                         <Button variant="contained" color="secondary" type="submit">Payment</Button>
                                     </TableCell>
@@ -97,6 +114,7 @@ function RenderCheck(props) {
 const mapStateToProps = state => ({
     cart: state.cart.cartItem,
     userID: state.user.userDetail,
+    total: state.cart.totalPrice
 })
 
 export default connect(mapStateToProps)(RenderCheck);

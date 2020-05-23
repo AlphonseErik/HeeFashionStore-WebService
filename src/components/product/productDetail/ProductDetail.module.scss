@@ -1,6 +1,136 @@
-.productDetail {
-  img {
-    height: 200px;
-    width: 100px;
-  }
+@import '../../../Scss/Helper/variable';
+@import '../../../Scss/Helper/mixin';
+
+.headerDetail {
+    background-color: gainsboro;
+    height: 40px;
+}
+
+.landingPage {
+    // background: linear-gradient(#29303B, #29303B, #29303B);
+    color: $color-white-0;
+    height: 250px;
+    .landingPage_gift,
+    .landingPage_head {
+        i {
+            font-size: $fs-2 + 15;
+            padding-top: $pd-1 + 5;
+            &:hover {
+                color: yellowgreen;
+            }
+        }
+        span {
+            margin-bottom: $mg-2 - 5;
+        }
+        @include MediaQuery(small) {
+            opacity: 0;
+        }
+    }
+    .classstar {
+        i {
+            color: yellow;
+            margin: 0 $mg-0;
+        }
+    }
+    .textcourse {
+        @include MediaQuery(small) {
+            margin-top: -120px;
+            font-size: $fs-1;
+            padding: 0;
+            padding-left: $pd-2 +30;
+        }
+        h2 {
+            @include MediaQuery(small) {
+                font-size: $fs-2 +3;
+            }
+        }
+        h5 {
+            @include MediaQuery(small) {
+                font-size: $fs-1 +3;
+            }
+        }
+    }
+}
+
+.right_course {
+    font-size: $fs-2 + 20;
+    position: relative;
+    width: 350px;
+    height: 700px;
+    top: -150px;
+    background-color: $color-white-0;
+    box-shadow: 0 0 1px 1px rgba(20, 23, 28, .1), 0 3px 1px 0 rgba(20, 23, 28, .1);
+    @include MediaQuery(extra-large) {
+        width: 300px;
+        height: 650px;
+    }
+    @include MediaQuery(large) {
+        width: 250px;
+        height: 650px;
+        margin-left: -50px;
+    }
+    @include MediaQuery(medium) {
+        margin-top: $mg-2 +25 !important;
+        margin-left: 15%;
+    }
+    @include MediaQuery(small) {
+        margin-left: -200px;
+        margin-top: $mg-1 +95 !important;
+    }
+    img {
+        width: 95%;
+        height: 250px;
+    }
+    h1 {
+        padding-left: $pd-2 +5;
+        @include MediaQuery(large) {
+            font-size: $fs-3 +6;
+            padding-left: $pd-2 +18;
+        }
+    }
+    .cartRightItem {
+        text-align: center;
+        h2 {
+            font-size: $fs-2 + 20;
+            padding-top: $pd-2;
+            text-align: left !important;
+            padding-left: $pd-2;
+            @include MediaQuery(large) {
+                padding: 0;
+                margin: 0;
+                padding-left: $pd-2 +5;
+                font-size: $fs-2 +5;
+            }
+        }
+        p {
+            font-size: $fs-0;
+        }
+        button {
+            @include btn_AddCard($color-white-0, $fs-1 +5, $pd-2, $pd-2 + 85, $color-red-0, $mg-1);
+            @include MediaQuery(extra-large) {
+                @include btn_AddCard($color-white-0, $fs-1 +5, $pd-1, $pd-2 + 35, $color-red-0, $mg-1);
+            }
+            @include MediaQuery(large) {
+                @include btn_AddCard($color-white-0, $fs-1 +5, $pd-0, $pd-2 + 20, $color-red-0, $mg-1);
+            }
+        }
+    }
+}
+
+.righttext {
+    padding-top: $pd-1 + 5;
+    font-size: $fs-2 - 5;
+    line-height: 10px;
+    padding-left: $pd-1;
+    @include MediaQuery(large) {
+        font-size: $fs-0;
+        line-height: 20px;
+    }
+    h5 {
+        font-size: $fs-1 + 5;
+        font-weight: 300;
+    }
+    p {
+        font-weight: 300;
+    }
 }

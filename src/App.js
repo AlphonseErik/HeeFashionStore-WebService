@@ -4,7 +4,7 @@ import HomeScreen from "./screens/homeScreen/HomeSreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import { connect } from "react-redux";
 import { restConnector } from "./services";
-import { LOGIN, GET_PRODUCT } from "./redux/action/actionType";
+import { LOGIN, GET_PRODUCT, LOGIN_ADMIN } from "./redux/action/actionType";
 import reduxAction from "./redux/action/action";
 import NotFoundScreen from "./screens/notFound/NotFoundScreen";
 import RegisterScreen from "./screens/registerScreen/RegisterScreen";
@@ -17,8 +17,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Payment from "./components/payment/Payment";
 import Header from "./layouts/header/Header";
+import Footer from "./layouts/footer/Footer";
+import AdminScreen from "./screens/adminScreen/AdminScreen";
+import AuthAdminRoute from "./HOC/AuthAdmin";
 
-const App = props => {
+const App = (props) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -38,9 +41,9 @@ const App = props => {
             "sans-serif",
             '"Apple Color Emoji"',
             '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-          ].join(",")
-        }
+            '"Segoe UI Symbol"',
+          ].join(","),
+        },
       }),
     [prefersDarkMode]
   );
@@ -48,8 +51,12 @@ const App = props => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const credentials = localStorage.getItem("account");
+    const isAdmin = localStorage.getItem("isAdmin");
     if (accessToken) {
       restConnector.defaults.headers["Authorization"] = "Bearer " + accessToken;
+      if (isAdmin) {
+        props.dispatch(reduxAction(LOGIN_ADMIN, JSON.parse(credentials)));
+      }
       props.dispatch(reduxAction(LOGIN, JSON.parse(credentials)));
     }
     const product = localStorage.getItem("product");
@@ -85,8 +92,9 @@ const App = props => {
               <Route component={NotFoundScreen} />
 
               {/* Private Route */}
-              {/* <PrivateRoute path="" Component/> */}
+              {/* <AuthAdminRoute path="/dashboard" component={AdminScreen} /> */}
             </Switch>
+            <Footer />
           </Container>
         </React.Fragment>
       </ThemeProvider>
@@ -94,8 +102,8 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  amount: state.amount
+const mapStateToProps = (state) => ({
+  amount: state.amount,
 });
 
 export default connect(mapStateToProps)(App);

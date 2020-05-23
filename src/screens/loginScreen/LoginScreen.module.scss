@@ -1,0 +1,41 @@
+@import '../../Scss/Helper/variable';
+@import '../../Scss/Helper/mixin';
+.tong {
+    background-color: #282c35;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    .loginStyle {
+        position: relative;
+        .test {
+            box-shadow: 0 0 1px 3px rgba(20, 23, 28, .1), 0 3px 3000px 2000px rgba(20, 23, 28, .1);
+            width: 400px;
+            margin-left: 33%;
+            margin-top: $mg-2 +15;
+            padding: $pd-2 +30 0;
+            background-color: $color-white-0;
+            @include MediaQuery(medium) {
+                margin-left: 25%;
+            }
+            @include MediaQuery(small) {
+                margin-left: 5%;
+                width: 300px;
+            }
+            button {
+                padding-top: $pd-2 -10;
+                font-size: $fs-2;
+                letter-spacing: 2px;
+                background: #dc3545;
+                color: white;
+                font-weight: bold;
+            }
+            div {
+                div {
+                    h2 {
+                        padding-top: $fs-2 +20;
+                    }
+                }
+            }
+        }
+    }
+}

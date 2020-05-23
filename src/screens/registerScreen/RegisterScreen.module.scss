@@ -1,0 +1,42 @@
+@import '../../Scss/Helper/variable';
+@import '../../Scss/Helper/mixin';
+.tong {
+    background-color: #282c35;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    position: absolute;
+    .signupStyle {
+        width: 480px;
+        margin-left: 33%;
+        background-color: $color-white-0;
+        position: relative;
+        padding: $pd-2 0;
+        margin-top: $mg-2;
+        @include MediaQuery(medium) {
+            margin-left: 20%;
+            width: 400px;
+        }
+        @include MediaQuery(small) {
+            margin-left: 10%;
+            width: 300px;
+            height: 550px;
+        }
+        button {
+            background: #dc3545;
+            color: $color-white-0;
+            font-weight: $fw-bold;
+            letter-spacing: 2px;
+            font-size: 20px;
+        }
+        div {
+            h3 {
+                padding-top: $fs-2;
+                text-align: center
+            }
+            p {
+                padding-left: $pd-1;
+            }
+        }
+    }
+}

@@ -1,8 +1,9 @@
-import { DELETED_FROM_CART, GET_PRODUCT, ADD_TO_CART, ORDER_DELETE_PRODUCT } from '../action/actionType';
+import { DELETED_FROM_CART, GET_PRODUCT, ADD_TO_CART, ORDER_DELETE_PRODUCT, ADD_TOTAL } from '../action/actionType';
 import { settings } from '../../configs/settings';
 
 let initialState = {
     cartItem: [],
+    totalPrice: [],
 };
 
 const CartReducer = (state = initialState, { type, payload }) => {
@@ -22,7 +23,7 @@ const CartReducer = (state = initialState, { type, payload }) => {
 
         }
         case DELETED_FROM_CART: {
-            let cartItem = [...state.cartItem];
+            let cartItem = [state.cartItem];
             let index = cartItem.findIndex(product => product.ID === payload);
             cartItem.splice(index, 1);
             state.cartItem = cartItem;
@@ -35,9 +36,23 @@ const CartReducer = (state = initialState, { type, payload }) => {
             return { ...state };
         }
         case ORDER_DELETE_PRODUCT: {
-            console.log('payload', payload);
             localStorage.setItem(settings.product, []);
             return state
+        }
+        case ADD_TOTAL: {
+            // let totalPrice = [...state.totalPrice];
+            // let index = totalPrice.findIndex(product => product.ID === payload.ID);
+            // console.log(index)
+            // if (index === -1) {
+            let { price, value } = payload;
+            let totalPrice = (price * value)
+            // } else {
+            //     let { price, value } = payload;
+            //     let addNew = (price * value)
+            //     totalPrice += addNew
+            // }
+            state.totalPrice = totalPrice;
+            return { ...state }
         }
         default:
             return state;

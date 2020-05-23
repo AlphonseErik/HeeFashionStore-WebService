@@ -12,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import RenderCheck from './view/renderCheck/RenderCheck';
+import { ADD_TOTAL } from '../../redux/action/actionType';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,7 +39,14 @@ const Payment = props => {
         )
     }
 
-    const renderPayment = () => {
+    const handleChange = (price, value, ID) => {
+        props.dispatch({
+            type: ADD_TOTAL,
+            payload: { price, value, ID }
+        })
+    }
+
+    const renderItemPayment = () => {
         console.log('cart', props.cart)
         return (
             <FormControl className={classes.formControl}>
@@ -62,7 +70,7 @@ const Payment = props => {
                                     <TableCell align="left">{item.productName}</TableCell>
                                     <TableCell align="center">{item.value}</TableCell>
                                     <TableCell align="center">{item.price}</TableCell>
-                                    <TableCell align="center">{item.price * item.value}</TableCell>
+                                    <TableCell align="center" onChange={handleChange(item.price, item.value, item.ID)}>{item.price * item.value}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -75,7 +83,7 @@ const Payment = props => {
     const renderCheck = () => {
         return (
             <div>
-                <RenderCheck history={props.history}/>
+                <RenderCheck item={props.cart} />
             </div>
         )
     }
@@ -87,7 +95,7 @@ const Payment = props => {
                     {renderListCart()}
                 </Grid>
                 <Grid item xs={5}>
-                    {renderPayment()}
+                    {renderItemPayment()}
                     {renderCheck()}
                 </Grid>
             </Grid>

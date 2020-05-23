@@ -1,10 +1,64 @@
 import React from 'react';
 import { signInAction } from '../../redux/action/authAction';
 import { connect } from 'react-redux';
+import { OutlinedInput, makeStyles, Container, TextField, FormControl, InputLabel, InputAdornment, IconButton, Button } from '@material-ui/core';
+import classesStyle from "./LoginScreen.module.scss";
+import { VisibilityOff, Visibility } from '@material-ui/icons';
+import clsx from 'clsx';
 
 function LoginScreen(props) {
 
-    console.log(props.history)
+    const useStylesPw = makeStyles(theme => ({
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        margin: {
+            margin: theme.spacing(1),
+        },
+        withoutLabel: {
+            marginTop: theme.spacing(3),
+        },
+        textField: {
+            width: 200,
+        },
+    }));
+
+    const [isButtonDisabled, setIsButtonDisabled] = React.useState(true);
+    React.useEffect(() => {
+        if (props.credentials) {
+            setIsButtonDisabled(false);
+        } else {
+            setIsButtonDisabled(true);
+        }
+    })
+
+    const handleClickShowPassword = () => {
+        setUser({ ...user, showPassword: !user.showPassword });
+    };
+
+    const handleMouseDownPassword = event => {
+        event.preventDefault();
+    };
+
+    const useStyles = makeStyles(theme => ({
+        textField: {
+            width: 300,
+            fontSize: 16,
+
+
+        },
+        button: {
+            width: 200,
+            fontSize: 16,
+            marginTop: 30,
+            borderRadius: 25
+        }
+    }));
+
+    const classes = useStyles();
+
+
     let [user, setUser] = React.useState({
         userLogin: {
             username: "",
@@ -57,21 +111,49 @@ function LoginScreen(props) {
     let renderLogin = () => {
         return (
             <div className="container">
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <div>
-                            <h1>Username</h1>
-                            <input name="username" type="text" onChange={handleChange} />
-                            <p className="text text-danger">{user.errors.username}</p>
+                <Container>
+                    <form className="container" onSubmit={handleSubmit} className={classesStyle.loginStyle} autoComplete="on">
+                        <div className={classesStyle.test}>
+                            <div className="form-group card-block">
+                                <div className="text-center">
+                                    <h1 className="text text-danger"> Log In</h1>
+                                </div>
+                                <div className="text-center">
+                                    <TextField variant="outlined" name="username" label="Username" onChange={handleChange} className={classes.textField} margin="normal" />
+                                    <p className="text text-danger">{user.errors.username}</p>
+                                </div>
+                                <div className="text-center">
+                                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                        <OutlinedInput
+                                            name="password"
+                                            onChange={handleChange}
+                                            type={user.showPassword ? 'text' : 'password'}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end">
+                                                        {user.showPassword ? <Visibility /> : <VisibilityOff />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            labelWidth={70}
+                                        />
+                                    </FormControl>
+                                    <p className="text text-danger">{user.errors.password}</p>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="text-center">
+                                    <Button type="submit" className={classes.button}>Log In</Button>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h1>Password</h1>
-                            <input name="password" type="password" onChange={handleChange} />
-                            <p className="text text-danger">{user.errors.password}</p>
-                        </div>
-                    </div>
-                    <button className="btn btn-success" type="submit">Login</button>
-                </form>
+                    </form>
+                </Container>
             </div>
         )
     }

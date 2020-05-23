@@ -1,0 +1,14 @@
+@import '../../Scss/Helper/variable';
+.contentclass {
+    padding-top: $pd-2 +20;
+    a {
+        text-decoration: none;
+        font-size: $fs-0;
+        color: darkolivegreen;
+    }
+    button {
+        background-color: $color-white-0;
+        color: $color-black-0;
+        border: 1px solid;
+    }
+}
