@@ -83,7 +83,7 @@ const Payment = props => {
     const renderCheck = () => {
         return (
             <div>
-                <RenderCheck item={props.cart} />
+                <RenderCheck item={props.cart} history={props.history}/>
             </div>
         )
     }

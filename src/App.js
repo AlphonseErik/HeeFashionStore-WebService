@@ -19,7 +19,7 @@ import Payment from "./components/payment/Payment";
 import Header from "./layouts/header/Header";
 import Footer from "./layouts/footer/Footer";
 import AdminScreen from "./screens/adminScreen/AdminScreen";
-import AuthAdminRoute from "./HOC/AuthAdmin";
+import AuthAdminRoute from "./HOC/AuthAdminRoute";
 
 const App = (props) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -49,13 +49,14 @@ const App = (props) => {
   );
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accesstoken = localStorage.getItem("accesstoken");
     const credentials = localStorage.getItem("account");
     const isAdmin = localStorage.getItem("isAdmin");
-    if (accessToken) {
-      restConnector.defaults.headers["Authorization"] = "Bearer " + accessToken;
+    if (accesstoken) {
+      restConnector.defaults.headers["Authorization"] = "Bearer " + accesstoken;
       if (isAdmin) {
         props.dispatch(reduxAction(LOGIN_ADMIN, JSON.parse(credentials)));
+        return 
       }
       props.dispatch(reduxAction(LOGIN, JSON.parse(credentials)));
     }
@@ -77,8 +78,10 @@ const App = (props) => {
               style={{ backgroundColor: "#cfe8fc" }}
             />
             <Header />
-            <Switch>
+            <Switch>  
+              {/**Public Route */}
               <Route path="/home" exact component={HomeScreen} />
+
               <Route path="/login" exact component={LoginScreen} />
               <Route path="/register" exact component={RegisterScreen} />
 
@@ -88,11 +91,11 @@ const App = (props) => {
               />
               <Route path="/products/:id" component={ProductDetail} />
               <Route path="/payments" component={Payment} />
-              <Route component={HomeScreen} />
-              <Route component={NotFoundScreen} />
 
               {/* Private Route */}
-              {/* <AuthAdminRoute path="/dashboard" component={AdminScreen} /> */}
+              <AuthAdminRoute path="/dashboard" exact Component={AdminScreen} />
+
+              <Route component={HomeScreen} />
             </Switch>
             <Footer />
           </Container>
@@ -103,7 +106,7 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  amount: state.amount,
+  // amount: state.amount,
 });
 
 export default connect(mapStateToProps)(App);

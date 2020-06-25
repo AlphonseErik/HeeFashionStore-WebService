@@ -13,14 +13,13 @@ export const signInAction = (userLogin, history) => {
             }).then(res => {
                 console.log(res.data);
                 localStorage.setItem(settings.token, res.data.accesstoken);
+                localStorage.setItem(settings.account, JSON.stringify(res.data));
                 restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accesstoken;
                 if (res.data.user.isSuperAdmin) {
                     localStorage.setItem(settings.isAdmin, res.data.user.isSuperAdmin);
                     dispatch(reduxAction(LOGIN_ADMIN, res.data));
-                    history.push('./dashboard');
+                    return history.push('./dashboard');
                 }
-                localStorage.setItem(settings.account, JSON.stringify(res.data));
-                
                 dispatch(reduxAction(LOGIN, res.data));
                 history.push('./home');
             }).catch(err => {

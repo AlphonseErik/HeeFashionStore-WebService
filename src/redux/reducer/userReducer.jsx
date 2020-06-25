@@ -1,15 +1,19 @@
-import { LOGIN, LOGOUT } from '../action/actionType';
+import { LOGIN, LOGOUT, LOGIN_ADMIN } from '../action/actionType';
 
 let initialState = {
     credentials: null,
     userDetail: null,
-    isLogin: false
+    isLogin: false,
 }
 
 const UserReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case LOGIN: {
-            console.log(payload)
+            state.credentials = payload;
+            state.userDetail = payload.user;
+            return { ...state, isLogin: true };
+        }
+        case LOGIN_ADMIN: {
             state.credentials = payload;
             state.userDetail = payload.user;
             return { ...state, isLogin: true };

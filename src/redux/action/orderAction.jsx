@@ -23,6 +23,7 @@ export const orderAction = (order, userid, history) => {
                 console.log(res.data);
                 let response = res.data;
                 if (response.status === "SUCCESS") {
+                    history.push('./home');
                     dispatch(reduxAction(DELETED_FROM_CART, res.data))
                     return alert('ORDER SUCCESS');
                 }

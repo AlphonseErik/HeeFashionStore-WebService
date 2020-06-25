@@ -4,7 +4,7 @@ import CategoryReducer from './categoryReducer';
 import ProductReducer from './productReducer';
 import CartReducer from './cartReducer';
 import AmountReducer from './amountReducer';
-import OrderService from '../../services/orderService';
+import OrderReducer from './orderReducer';
 
 const RootReducer = combineReducers({
     user: UserReducer,
@@ -12,7 +12,7 @@ const RootReducer = combineReducers({
     product: ProductReducer,
     cart: CartReducer,
     amount: AmountReducer,
-    order: OrderService,
+    order: OrderReducer,
 });
 
 export default RootReducer;
